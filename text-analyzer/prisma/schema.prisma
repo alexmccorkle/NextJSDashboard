@@ -1,0 +1,37 @@
+// prisma/schema.prisma
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String
+  analyses      Analysis[]
+  role          String    @default("USER")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Analysis {
+  id                    String    @id @default(cuid())
+  text                  String
+  score                 Float
+  confidence            Float
+  wordCount            Int
+  averageWordLength    Float
+  sentenceCount        Int
+  averageSentenceLength Float
+  uniqueWordRatio      Float
+  longWordRatio        Float
+  punctuationRatio     Float
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id])
+  createdAt             DateTime  @default(now())
+}
