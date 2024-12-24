@@ -2,14 +2,17 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { error } from "console";
 
 export default function Login() {
   // export default ELI5 = "make this function available to other files", the default meaning it's the only thing being exported
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null); // ELI5: create a state variable to store the error message
   const [isLoading, setIsLoading] = useState(false);
+
+  const justRegistered = searchParams.get("registered") === "true"; // Check if the user just registered
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -39,6 +42,7 @@ export default function Login() {
       setIsLoading(false);
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -46,6 +50,11 @@ export default function Login() {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
+          {justRegistered && (
+            <div className="mt-2 text-center text-sm text-green-600">
+              Registration successful! Please sign in with your new account.
+            </div>
+          )}
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">

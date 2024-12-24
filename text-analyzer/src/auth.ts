@@ -1,19 +1,28 @@
 // src/auth.ts
 import NextAuth from 'next-auth'
-import { PrismaAdapter } from '@auth/prisma-adapter'
-import { prisma } from '@/lib/prisma'
+import type { NextAuthConfig, Session, User } from '@auth/core/types'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
-import { User } from '@prisma/client'
 
-export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
-  session: {
-    strategy: "jwt"
-  },
-  pages: {
-    signIn: '/login',
-  },
+// Define types for our session and JWT
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id?: string
+      email?: string
+      name?: string
+      role?: string
+    }
+  }
+
+  interface JWT {
+    role?: string
+  }
+}
+
+// Create the authentication configuration with proper typing
+const authConfig: NextAuthConfig = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -21,7 +30,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials): Promise<any> {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null
         }
@@ -52,18 +61,25 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       }
     })
   ],
+  pages: {
+    signIn: '/login',
+  },
+  session: { strategy: "jwt" },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
         token.role = user.role
       }
       return token
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (session?.user) {
         session.user.role = token.role
       }
       return session
     }
   }
-})
+}
+
+// Create and export the auth object
+export const auth = NextAuth(authConfig)
