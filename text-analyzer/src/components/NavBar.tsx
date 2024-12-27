@@ -31,11 +31,11 @@ const NavBar = () => {
   // Mounted = component is rendered on the page
 
   return (
-    <nav className="bg-gray-800 text-white p-4">
+    <nav className="bg-teal-950 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="text-xl font-bold">
-          <Link href="/" className="hover:text-gray-300">
+          <Link href="/" className="hover:text-teal-300">
             AI Checker
           </Link>
         </div>
@@ -47,13 +47,13 @@ const NavBar = () => {
             <>
               <Link
                 href="/dashboard"
-                className="hover:text-gray-300 transition-colors"
+                className="hover:text-teal-300 transition-colors"
               >
                 Dashboard{" "}
               </Link>
               <button
                 onClick={handleLogout}
-                className="hover:text-gray-300 transition-colors"
+                className="hover:text-teal-300 transition-colors"
               >
                 Log Out{" "}
               </button>
@@ -63,13 +63,13 @@ const NavBar = () => {
             <>
               <Link
                 href="/login"
-                className="hover:text-gray-300 transition-colors"
+                className="hover:text-teal-300 transition-colors"
               >
                 Log In{" "}
               </Link>
               <Link
                 href="/register"
-                className="hover:text-gray-300 transition-colors"
+                className="hover:text-teal-300 transition-colors"
               >
                 Register{" "}
               </Link>
