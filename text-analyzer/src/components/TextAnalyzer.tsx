@@ -84,15 +84,15 @@ export default function TextAnalyzer() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             className="w-full h-48 p-4 border rounded-lg focus:ring-2 
-                     focus:ring-blue-500 focus:border-blue-500"
+                     focus:ring-teal-500 focus:border-teal-500 text-teal-950"
             placeholder="Paste your text here..."
           />
         </div>
 
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg 
-                   hover:bg-blue-600 disabled:bg-blue-300 
+          className="px-4 py-2 bg-teal-500 text-white rounded-lg 
+                   hover:bg-teal-600 disabled:bg-teal-300 
                    disabled:cursor-not-allowed transition-colors"
           disabled={!text.trim() || analysis.isLoading}
         >
@@ -107,10 +107,12 @@ export default function TextAnalyzer() {
       ) : (
         analysis.result && (
           <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h2 className="text-xl font-semibold mb-4">Analysis Results</h2>
+            <h2 className="text-xl font-semibold mb-4 text-teal-900">
+              Analysis Results
+            </h2>
 
             <div className="mb-6">
-              <div className="text-2xl font-bold text-blue-600">
+              <div className="text-2xl font-bold text-teal-600">
                 {analysis.result.score.toFixed(1)}% AI Probability
               </div>
               <p className="text-gray-600 text-sm mt-1">

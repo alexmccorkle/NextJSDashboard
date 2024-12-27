@@ -5,24 +5,31 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 
-// Define types for our session and JWT
+// Define more specific types for our session and JWT
 declare module 'next-auth' {
   interface Session {
     user: {
       id?: string
       email?: string
       name?: string
-      role?: string
+      role?: 'user' | 'admin'  // Make the role type more specific
     }
   }
-
   interface JWT {
-    role?: string
+    role?: 'user' | 'admin'
   }
 }
 
-// Create the authentication configuration with proper typing
-const authConfig: NextAuthConfig = {
+// Define a type for our user data
+interface DatabaseUser {
+  id: string
+  email: string
+  name: string
+  password: string
+  role: 'user' | 'admin'
+}
+
+export const authConfig: NextAuthConfig = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -31,32 +38,38 @@ const authConfig: NextAuthConfig = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error('Missing credentials')
+          }
+
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email }
+          }) as DatabaseUser | null
+
+          if (!user) {
+            throw new Error('User not found')
+          }
+
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.password
+          )
+
+          if (!isPasswordValid) {
+            throw new Error('Invalid password')
+          }
+
+          // Return only the data we want to expose
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role
+          }
+        } catch (error) {
+          console.error('Authentication error:', error)
           return null
-        }
-
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
-        })
-
-        if (!user) {
-          return null
-        }
-
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        )
-
-        if (!isPasswordValid) {
-          return null
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role
         }
       }
     })
@@ -66,14 +79,17 @@ const authConfig: NextAuthConfig = {
   },
   session: { strategy: "jwt" },
   callbacks: {
-    async jwt({ token, user }: { token: any; user: any }) {
+    // Improve type safety in callbacks
+    async jwt({ token, user }) {
       if (user) {
         token.role = user.role
+        token.id = user.id
       }
       return token
     },
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }) {
       if (session?.user) {
+        session.user.id = token.id as string
         session.user.role = token.role
       }
       return session
@@ -81,5 +97,4 @@ const authConfig: NextAuthConfig = {
   }
 }
 
-// Create and export the auth object
 export const auth = NextAuth(authConfig)

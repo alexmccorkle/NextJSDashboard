@@ -14,7 +14,7 @@ model User {
   email         String    @unique
   password      String
   analyses      Analysis[]
-  role          String    @default("USER")
+  role          String    @default("user")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
