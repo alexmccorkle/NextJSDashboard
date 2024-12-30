@@ -1,12 +1,13 @@
-// src/app/api/userData/route.ts
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
+import { Session } from 'next-auth'
 import { authConfig } from '@/auth'
 import { prisma } from '@/lib/prisma'
 
 export async function GET() {
   try {
-    const session = await getServerSession(authConfig)
+    // Tell TS that the session will match our Session type
+    const session = await getServerSession(authConfig) as Session | null
     
     if (!session?.user?.email) {
       return NextResponse.json(

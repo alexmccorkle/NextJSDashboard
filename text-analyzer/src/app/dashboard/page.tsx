@@ -10,7 +10,7 @@ import TextAnalyzer from "@/components/TextAnalyzer";
 interface UserData {
   id: string;
   email: string;
-  role: "user" | "admin"; // Be explicit about possible role values
+  role: "user" | "ADMIN"; // Be explicit about possible role values
 }
 
 const Dashboard = () => {
@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   return (
     <div className="p-6">
-      {userData?.role === "admin" ? <AdminDashboard /> : <UserDashboard />}
+      {userData?.role === "ADMIN" ? <AdminDashboard /> : <UserDashboard />}
     </div>
   );
 };
