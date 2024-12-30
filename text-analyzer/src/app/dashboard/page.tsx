@@ -5,6 +5,8 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import TextAnalyzer from "@/components/TextAnalyzer";
+import AdminDashboard from "@/components/admin/AdminDashboard";
+import UserDashboard from "@/components/user/UserDashboard";
 
 // Define interfaces for our data types
 interface UserData {
@@ -68,24 +70,6 @@ const Dashboard = () => {
   return (
     <div className="p-6">
       {userData?.role === "ADMIN" ? <AdminDashboard /> : <UserDashboard />}
-    </div>
-  );
-};
-
-// Define the dashboard components with proper types
-const AdminDashboard = () => {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-    </div>
-  );
-};
-
-const UserDashboard = () => {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">User Dashboard</h1>
-      <TextAnalyzer />
     </div>
   );
 };
