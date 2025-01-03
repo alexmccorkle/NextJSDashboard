@@ -1,5 +1,3 @@
-"use client"; // This tells Next.js this component needs to run on the client side
-
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 

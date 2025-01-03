@@ -1,10 +1,8 @@
-// app/dashboard/page.tsx
 "use client";
 
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import TextAnalyzer from "@/components/TextAnalyzer";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import UserDashboard from "@/components/user/UserDashboard";
 
@@ -23,6 +21,7 @@ const Dashboard = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("Session status: ", status);
     if (status === "unauthenticated") {
       router.push("/login");
       return;
@@ -37,7 +36,6 @@ const Dashboard = () => {
         const data = (await response.json()) as UserData;
         setUserData(data);
       } catch (error) {
-        // Properly type the error
         const errorMessage =
           error instanceof Error ? error.message : "An unknown error occurred";
         setError(errorMessage);
@@ -48,10 +46,12 @@ const Dashboard = () => {
 
     if (session) {
       fetchUserData();
+    } else {
+      setLoading(false);
     }
   }, [session, status, router]);
 
-  if (loading) {
+  if (status === "loading" || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <p>Loading...</p>
@@ -68,7 +68,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="flex justify-center min-h-screen">
       {userData?.role === "ADMIN" ? <AdminDashboard /> : <UserDashboard />}
     </div>
   );
