@@ -21,7 +21,7 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="justify-center space-y-4">
       <h1 className="text-lg font-bold">User Dashboard</h1>
       <p className="my-4">Welcome, {currentUser?.name} !</p>
       <p className="my-4">
@@ -31,8 +31,10 @@ const UserDashboard = () => {
         <WriteTextButton onClick={handleWriteTextClick} />
         <UploadTextButton onClick={handleUploadTextClick} />
       </div>
-      {showTextAnalyzer && <TextAnalyzer />}
-      {showUploadText && <UploadText />}
+      <div className="flex space-x-4 mt-4">
+        {showTextAnalyzer && <TextAnalyzer />}
+        {showUploadText && <UploadText />}
+      </div>
     </div>
   );
 };
