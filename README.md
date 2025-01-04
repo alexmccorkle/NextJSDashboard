@@ -13,6 +13,7 @@ User can upload .txt files or write/paste text and receive a score
 User can navigate to /uploads page and see their previous uploads
 
 Admin can see all users
+Admin can see user's uploads
 
 ### Backlog:
 
@@ -23,7 +24,6 @@ User can see Admin flags
 Dashboard Button Notification if unread flags?
 
 ADMIN:
-Admin can see user's uploads
 -> Admin clicks user's username
 --> Modal opens showing uploads in compact version (this should show time/date + score)
 ---> Admin can click on View More on a specific upload and see that upload's full text

@@ -74,6 +74,27 @@ export async function GET() {
         { error: 'Not authenticated' },
         { status: 401 })
         }
+
+
+    // IF ADMIN:
+    if (session.user.role === 'admin') {
+      const analysis = await prisma.analysis.findMany({
+        orderBy: {
+          createdAt: 'desc'
+        },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            }
+          }
+        }
+      })
+      return NextResponse.json(analysis)
+    }
+
     
     const analysis = await prisma.analysis.findMany({
     where: {

@@ -10,7 +10,7 @@ import UserDashboard from "@/components/user/UserDashboard";
 interface UserData {
   id: string;
   email: string;
-  role: "user" | "ADMIN"; // Be explicit about possible role values
+  role: "user" | "admin"; // Be explicit about possible role values
 }
 
 const Dashboard = () => {
@@ -69,7 +69,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex justify-center min-h-screen">
-      {userData?.role === "ADMIN" ? <AdminDashboard /> : <UserDashboard />}
+      {userData?.role === "admin" ? <AdminDashboard /> : <UserDashboard />}
     </div>
   );
 };

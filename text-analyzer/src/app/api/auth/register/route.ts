@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
     // create user
     const user = await prisma.user.create({
-      data: { name, email, password: hashedPassword, role: 'USER' },
+      data: { name, email, password: hashedPassword, role: 'user' },
     });
 
     // remove password from response so it's never sent on the line
