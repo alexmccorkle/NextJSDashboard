@@ -51,6 +51,12 @@ const NavBar = () => {
               >
                 Dashboard{" "}
               </Link>
+              <Link
+                href="/uploads"
+                className="hover:text-teal-300 transition-colors"
+              >
+                Uploads{" "}
+              </Link>
               <button
                 onClick={handleLogout}
                 className="hover:text-teal-300 transition-colors"

@@ -5,8 +5,7 @@ import { prisma } from '@/lib/prisma'
 import { convertResultToAnalysisData } from '@/types/analysis'
 import { authConfig } from '@/auth'
 
-export async function POST(request: Request)
-{
+export async function POST(request: Request) {
   try {
     const session = await getServerSession(authConfig)
 
@@ -64,3 +63,33 @@ export async function POST(request: Request)
     )
   }
 }
+
+
+export async function GET() {
+  try {
+    const session = await getServerSession(authConfig)
+
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: 'Not authenticated' },
+        { status: 401 })
+        }
+    
+    const analysis = await prisma.analysis.findMany({
+    where: {
+      userId: session.user.id
+    },
+    orderBy: {
+      createdAt: 'desc'
+    }
+    })
+
+    return NextResponse.json(analysis)
+    }
+    catch (error) {
+      return NextResponse.json(
+        { error: 'Failed to fetch analysis' },
+        { status: 500 }
+      )
+    }
+  }
