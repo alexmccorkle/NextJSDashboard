@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import AnalysisResults from "./AnalysisResults";
+import AnalysisModal from "./AnalysisModal";
 
 interface User {
   id: string;
@@ -71,10 +72,10 @@ export default function AnalysisList() {
       <h1 className="text-2xl font-bold text-white-900">
         {isAdmin ? "All Analyses" : "Your Analyses"}
       </h1>
-      <div className="space-y-4">
+      <div className="space-y-4 flex-col">
         {analyses.map((analysis) => (
           <div key={analysis.id} className="border rounded-lg p-6">
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <h2 className="text-lg font-semibold text-gray-500">
                 Analysis from {new Date(analysis.createdAt).toLocaleString()}
               </h2>
@@ -83,6 +84,14 @@ export default function AnalysisList() {
                   User: {analysis.user.name || analysis.user.email}
                 </p>
               )}
+              <div className="absolute top-0 right-2">
+                <AnalysisModal
+                  text={analysis.text}
+                  createdAt={analysis.createdAt}
+                  user={analysis.user}
+                  wordCount={analysis.wordCount}
+                />
+              </div>
               {/* <p className="text-sm text-gray-300 mt-2">{analysis.text}</p> */}
             </div>
 
