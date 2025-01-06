@@ -24,7 +24,8 @@ User can see Admin flags
 Dashboard Button Notification if unread flags?
 
 ADMIN:
--> Admin clicks user's username
---> Modal opens showing uploads in compact version (this should show time/date + score)
----> Admin can click on View More on a specific upload and see that upload's full text
-----> From here, admin can flag the upload to notify user that they need to check it etc.
+Admin also has Uploads tab, this shows all user Uploads
+
+- Will implement sorting soon!
+  When clicking View Text, the full submission text is displayed as a modal, which includes Date, Username and Word Count.
+- Will add a button(s) for option of flagging as "Suspicious" or "Definitely human!"
