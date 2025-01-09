@@ -1,10 +1,10 @@
-# AI Text Detection Dashboard
+# Christmas Project: AI Probability Checker Dashboard
 
 A Next.js project I'm messing around with in order to prepare for an upcoming Bachelor project where we will likely be using Next.js
 
-I wanted to make something similar to the upcoming project, which will be a dashboard for applications. Here user's would have to be able to apply and admin's would need the capabilities of managing applications. I thought it would be fun to make a Dashboard where user's can submit text and recieve a score for their text, while Admin's could oversee users' applications and scores.
+I wanted to make something similar to the upcoming project, which will be a dashboard for thesis applications. Users would have to be able to apply and admin's would need the capabilities of managing applications. I thought it would be fun to make a Dashboard where users can submit text and recieve a score for their text, while Admin's could oversee users' applications and scores.
 
-Still very much a work in progress, and still very much winging it. Learn by doing!
+Still very much a work in progress, and still very much winging it. Just getting my feet wet before we get started on the real project!
 
 ## Deets:
 
@@ -46,8 +46,8 @@ Still very much a work in progress, and still very much winging it. Learn by doi
 
 - Better sorting
 - Two-way flagging:
-- "Human"
-- "Definitely AI!"
+  - "Human"
+  - "Definitely AI!"
 
 ---
 
