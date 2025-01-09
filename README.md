@@ -1,30 +1,54 @@
-## Next.js Christmas Practice
+# AI Text Detection Dashboard
 
-Will be messing around trying to create a dashboard where user's can submit a text, and have it scored for how likely it is that it is AI-generated.
+A Next.js project I'm messing around with in order to prepare for an upcoming Bachelor project where we will likely be using Next.js
 
-Admin's can see user uploads and scores and flag(?) uploads.
+I wanted to make something similar to the upcoming project, which will be a dashboard for applications. Here user's would have to be able to apply and admin's would need the capabilities of managing applications. I thought it would be fun to make a Dashboard where user's can submit text and recieve a score for their text, while Admin's could oversee users' applications and scores.
 
-User's can upload or write in text and receive a score for AI probability that is saved to DB.
-User can also manage uploads (CRUD)
+Still very much a work in progress, and still very much winging it. Learn by doing!
 
-### Currently Implemented:
+## Deets:
 
-User can upload .txt files or write/paste text and receive a score
-User can navigate to /uploads page and see their previous uploads
-Uploads are more compact -> View Text Button opens modal with text instead of displaying by default
+## Tech Stack
 
-Admin can see all users
-Admin can see user's uploads
-When clicking View Text, the full submission text is displayed as a modal, which includes Date, Username and Word Count.
+- Next.js for the framework
+- Prisma as the ORM
+- SQLite for the database
+- NextAuth.js for authentication
 
-### Backlog:
+### Users:
 
-USER:
-User can edit/delete uploads
-User can see Admin flags
-Dashboard Button Notification if unread flags?
+- Submit text (or upload a .txt file) and get an AI probability score
+- Keep track of all your submissions in your uploads page
+- Manage your submissions (full CRUD capabilities coming soon!)
 
-ADMIN:
+### Admins:
 
-- Will implement sorting soon!
-- Will add a button(s) for option of flagging as "Suspicious" or "Definitely human!"
+- Overview of all users and their submissions
+- Compact view of submission details (when it was submitted, who wrote it, word count)
+- View More to see the full text that was submitted
+
+## Current Features:
+
+- Submit text and get your AI probability score
+- Check out your submission history
+- Simple, clean interface with modal popups for text viewing
+- Admin dashboard with user management
+
+## WIP:
+
+### Users:
+
+- Edit/delete your submissions
+- Cooler dashboard features
+- Get notified when admins flag your submissions
+
+### Admins:
+
+- Better sorting
+- Two-way flagging:
+- "Human"
+- "Definitely AI!"
+
+---
+
+This code is by no means perfect, but you gotta start somewhere right? :')
