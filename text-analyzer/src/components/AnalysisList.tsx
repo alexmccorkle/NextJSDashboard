@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import AnalysisResults from "./AnalysisResults";
 import AnalysisModal from "./AnalysisModal";
+import FlagSelector from "./Flag";
 
 interface User {
   id: string;
@@ -23,6 +24,7 @@ interface Analysis {
   longWordRatio: number;
   punctuationRatio: number;
   createdAt: string;
+  flag: string | null;
   user?: User; // optional field for admin view
 }
 
@@ -90,6 +92,13 @@ export default function AnalysisList() {
                   createdAt={analysis.createdAt}
                   user={analysis.user}
                   wordCount={analysis.wordCount}
+                />
+              </div>
+              <div>
+                <FlagSelector
+                  initialFlag={analysis.flag}
+                  analysisId={analysis.id}
+                  isAdmin={isAdmin}
                 />
               </div>
               {/* <p className="text-sm text-gray-300 mt-2">{analysis.text}</p> */}

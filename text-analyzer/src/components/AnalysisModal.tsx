@@ -57,7 +57,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
               onClick={() => setIsOpen(false)}
               className="text-gray-500 hover:text-gray-700"
             >
-              ×
+              Close
             </button>
           </div>
           <div className="mt-4">
