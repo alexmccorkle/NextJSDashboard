@@ -118,6 +118,8 @@ export default function AnalysisList() {
                   punctuationRatio: analysis.punctuationRatio,
                 },
               }}
+              flag={analysis.flag?.toLowerCase()}
+              user={isAdmin ? "admin" : "user"}
             />
           </div>
         ))}

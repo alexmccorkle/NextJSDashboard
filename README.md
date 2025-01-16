@@ -20,12 +20,16 @@ Still very much a work in progress, and still very much winging it. Just getting
 - Submit text (or upload a .txt file) and get an AI probability score
 - Keep track of all your submissions in your uploads page
 - Manage your submissions (full CRUD capabilities coming soon!)
+- Uploads have a badge indicator based Admin's flag: Either Human or Definitely AI
 
 ### Admins:
 
 - Overview of all users and their submissions
 - Compact view of submission details (when it was submitted, who wrote it, word count)
 - View More to see the full text that was submitted
+- Two-way flagging:
+  - "Human"
+  - "Definitely AI!"
 
 ## Current Features:
 
@@ -40,14 +44,10 @@ Still very much a work in progress, and still very much winging it. Just getting
 
 - Edit/delete your submissions
 - Cooler dashboard features
-- Get notified when admins flag your submissions
 
 ### Admins:
 
 - Better sorting
-- Two-way flagging:
-  - "Human"
-  - "Definitely AI!"
 
 ---
 

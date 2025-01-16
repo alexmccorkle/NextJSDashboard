@@ -53,7 +53,7 @@ const FlagSelector: React.FC<FlagSelectorProps> = ({
   if (isAdmin) {
     return (
       <div className="flex space-x-4">
-        <div className="text-sm font-medium text-gray-700"> Flag </div>
+        <div className="text-sm font-medium text-gray-700"></div>
         <div className="flex space-x-6">
           <label className="flex items-center">
             <input
@@ -62,6 +62,8 @@ const FlagSelector: React.FC<FlagSelectorProps> = ({
               value="human"
               checked={selectedType === "human"}
               onChange={(e) => updateFlag(e.target.value)}
+              className="appearance-none h-4 w-4 border border-gray-300 rounded-none checked:bg-teal-600 checked:border-white focus:outline-1 
+              focus:ring-teal-500 focus:ring-offset-2"
             />
             <span className="ml-2 text-sm text-gray-300">Human</span>
           </label>
@@ -72,6 +74,8 @@ const FlagSelector: React.FC<FlagSelectorProps> = ({
               value="ai"
               checked={selectedType === "ai"}
               onChange={(e) => updateFlag(e.target.value)}
+              className="appearance-none h-4 w-4 border border-gray-300 rounded-none checked:bg-red-600 checked:border-white focus:outline-1 
+              focus:ring-teal-500 focus:ring-offset-2"
             />
             <span className="ml-2 text-sm text-gray-300">Definitely AI! </span>
           </label>

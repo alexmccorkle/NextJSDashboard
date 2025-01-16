@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import AnalysisResults from "./AnalysisResults";
 
 interface User {
   id: string;
